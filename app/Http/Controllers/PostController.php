@@ -17,9 +17,21 @@ class PostController extends Controller
     {
         //
         
-        $posts = Post::paginate(5);
+        $posts = Post::paginate(6);
         return view('post.index', compact('posts'));
     }
+
+    public function cari(Request $request)
+	{
+		$cari = $request->cari;
+ 
+		$posts = Post::query()
+		->where('judul','like',"%".$cari."%")
+		->paginate();
+        
+		return view('post.index',['posts' => $posts]);
+ 
+	}
 
     /**
      * Show the form for creating a new resource.
@@ -100,12 +112,8 @@ class PostController extends Controller
         ]);
 
         $this->authorize('update', $post);
-        if (request()->file('gambar')) {
-            \Storage::delete($post->thumbnail);
-            $thumbnail = request()->file('gambar')->store("images/posts");
-        } else {
-            $thumbnail = $post->thumbnail;
-        }
+        $thumbnail = request()->file('gambar') ? request()->file('gambar')->store("images/posts") : null;
+
         $isi = $request->all();
 
         $isi['gambar'] = $thumbnail;

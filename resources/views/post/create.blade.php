@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="card-header">Tambah
-                    <h3>Tambah Post</h3>
+                    <h3>Tambah Buku</h3>
                 </div>
                 <div class="card-body">
                     <form action="/posts/store" method="post" enctype="multipart/form-data">

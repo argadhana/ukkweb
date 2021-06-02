@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function(){
     Route::get('all-posts', 'PostController@index')->name('posts')->withoutMiddleware('auth');
+    Route::get('/posts/cari','PostController@cari');
 
     Route::get('posts/create', 'PostController@create')->name('posts.create');
     Route::post('posts/store', 'PostController@store');
@@ -34,3 +35,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('posts/create', 'PostController@create');
+Route::get('/', 'HomeController@index');
